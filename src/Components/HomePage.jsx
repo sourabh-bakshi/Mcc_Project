@@ -1,4 +1,3 @@
-
 import { motion } from 'framer-motion';
 import HomeHeroSection from './Images/HomeHeroSection.jpg';
 import residential from './Images/residential.jpg';
@@ -28,45 +27,117 @@ const itemFade = {
 };
 
 export default function HomePage() {
-  return ( <>  
+  return (
     <div className="bg-white font-sans">
       {/* Header */}
       <motion.header
-        className="flex flex-col md:flex-row justify-between items-center gap-2 md:gap-0 px-6 py-2 shadow-md sticky top-0 z-50 bg-gradient-to-r from-teal-400/40 via-blue-300/30 to-green-300/40 backdrop-blur-md bg-opacity-60"
-        initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.9 }}
-        style={{ minHeight: 'unset', height: 'auto' }}
-      >
-        <div className="flex items-center gap-3">
-          <h1 className="text-3xl sm:text-4xl md:text-5xl font-extrabold text-[#1E2D3B] text-center md:text-left tracking-tight leading-tight">
-            MODERN <span className="block text-sm sm:text-base font-bold text-[#1E2D3B] tracking-wide">CONSTRUCTION CO.(INDIA)</span>
-          </h1>
-          <img src={companyLogo} alt="Company Logo" className="h-12 w-20 object-cover" />
-        </div>
-        <nav className="flex flex-wrap justify-center md:justify-end gap-4 text-[#1E2D3B] text-sm sm:text-base font-semibold w-full max-w-4xl mx-auto">
-          {['HOME', 'ABOUT US', 'PROJECTS', 'SERVICES', 'CONTACT US'].map((item, i) => (
-            <motion.a
-              key={i}
-              href="#"
-              className="relative group hover:text-blue-700 transition-colors duration-500"
-              whileHover={{ scale: 1.1 }}
-            >
-              <span className="relative z-10">{item}</span>
-              <span className="pointer-events-none absolute left-0 bottom-0 h-[2px] w-0 bg-blue-700 transition-all duration-500 group-hover:w-full origin-left"></span>
-            </motion.a>
-          ))}
-        </nav>
-      </motion.header>
+      className="relative flex flex-col md:flex-row justify-between items-center gap-2 md:gap-0 px-6 py-2 shadow-lg sticky top-0 z-50 bg-gradient-to-br from-[#0f172a]/70 via-[#1e293b]/80 to-[#0f172a]/70 backdrop-blur-xl bg-opacity-80 overflow-visible border-b border-white/10"
+      initial={{ y: -80, opacity: 0 }}
+      animate={{ y: 0, opacity: 1 }}
+      transition={{ duration: 0.9 }}
+    >
+      {/* Animated Background Bubbles */}
+      <div className="absolute inset-0 z-0 overflow-hidden pointer-events-none">
+        {[...Array(10)].map((_, i) => (
+          <div
+            key={i}
+            className="absolute bg-white/10 rounded-full animate-float blur-sm shadow-md"
+            style={{
+              width: `${20 + Math.random() * 30}px`,
+              height: `${20 + Math.random() * 30}px`,
+              top: `${Math.random() * 100}%`,
+              left: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 4}s`,
+              animationDuration: `${5 + Math.random() * 5}s`
+            }}
+          />
+        ))}
+      </div>
 
-      {/* Hero Section */}
+      {/* Header Content */}
+      <div className="relative z-10 flex items-center gap-4">
+        <div className="flex flex-col items-center leading-none">
+          <img src={companyLogo} alt="Company Logo" className="h-14 w-auto object-contain drop-shadow-xl" />
+          <span className="text-xl font-bold text-white tracking-tight -mt-1">MCC</span>
+          <span className="text-xs sm:text-sm font-semibold text-blue-400 tracking-[0.4em]">INDIA</span>
+        </div>
+
+        <div className="ml-2">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-white drop-shadow-lg">MODERN</h1>
+          <span className="block text-sm sm:text-base font-semibold text-white/80 mt-0.5">
+            CONSTRUCTION COMPANY (INDIA)
+          </span>
+        </div>
+      </div>
+
+      {/* Navigation Bar with Dropdowns */}
+      <nav className="relative z-10 flex flex-wrap justify-center md:justify-end gap-4 text-white text-sm sm:text-base font-semibold w-full max-w-4xl mx-auto">
+        {['HOME', 'SERVICES', 'CLIENTS', 'CONTACT US'].map((item, i) => (
+          <motion.a
+            key={i}
+            href="#"
+            className="relative group hover:text-cyan-300 transition-colors duration-500 flex items-center"
+            whileHover={{ scale: 1.1 }}
+          >
+            <span className="relative z-10 px-2">{item}</span>
+            {i < 3 && <span className="h-4 w-[1px] bg-white/20 mx-1"></span>}
+            <span className="pointer-events-none absolute left-0 bottom-0 h-[2px] w-0 bg-cyan-300 transition-all duration-500 group-hover:w-full origin-left"></span>
+          </motion.a>
+        ))}
+
+        {/* ABOUT Dropdown */}
+        <div className="relative group z-50 flex items-center">
+          <motion.div whileHover={{ scale: 1.1 }} className="cursor-pointer px-2">
+            ABOUT US
+            <div
+              className="absolute left-0 top-full mt-1 w-48 bg-white/90 backdrop-blur-md border border-white/20 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200"
+            >
+              {['Company Overview', 'Company Administration', 'Major Architects', 'Quality Control'].map((sub, idx) => (
+                <a key={idx} href="#" className="block px-4 py-2 text-sm text-slate-800 hover:bg-blue-100/60">{sub}</a>
+              ))}
+            </div>
+          </motion.div>
+          <span className="h-4 w-[1px] bg-white/20 mx-1"></span>
+        </div>
+
+        {/* PROJECTS Dropdown */}
+        <div className="relative group z-50 flex items-center">
+          <motion.div whileHover={{ scale: 1.1 }} className="cursor-pointer px-2">
+            PROJECTS
+            <div
+              className="absolute left-0 top-full mt-1 w-40 bg-white/90 backdrop-blur-md border border-white/20 rounded-xl shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200"
+            >
+              {['On Going', 'Executed'].map((sub, idx) => (
+                <a key={idx} href="#" className="block px-4 py-2 text-sm text-slate-800 hover:bg-blue-100/60">{sub}</a>
+              ))}
+            </div>
+          </motion.div>
+        </div>
+      </nav>
+
+      {/* Keyframe style for floating effect */}
+      <style>
+        {`
+          @keyframes float {
+            0% { transform: translateY(0px); opacity: 0.6; }
+            50% { transform: translateY(-20px); opacity: 1; }
+            100% { transform: translateY(0px); opacity: 0.6; }
+          }
+          .animate-float {
+            animation-name: float;
+            animation-iteration-count: infinite;
+            animation-timing-function: ease-in-out;
+          }
+        `}
+      </style>
+    </motion.header>
       <section className="relative h-[90vh] flex items-center px-4 sm:px-6 overflow-hidden">
         <motion.img
           src={HomeHeroSection}
           alt="Construction"
           className="absolute inset-0 w-full h-full object-cover z-0"
           initial={{ scale: 1.1, opacity: 0 }}
-          animate={{ scale: 1, opacity: 1 }}
+          animate={{ scale: 1, opacity: 0.8 }}
           transition={{ duration: 2 }}
         />
 
@@ -101,7 +172,7 @@ export default function HomePage() {
         <motion.div variants={itemFade} className="px-2">
           <h3 className="text-2xl sm:text-3xl font-bold text-[#1E2D3B] mb-4 border-b-4 border-blue-900 inline-block pb-1">ABOUT MCC INDIA</h3>
           <p className="text-[#1E2D3B] leading-relaxed text-base sm:text-lg mt-4">
-            Delivering excellence in civil and structural engineering for over 50 years.
+            Delivering excellence in civil and structural<br/> engineering for over 50 years.
           </p>
         </motion.div>
 
@@ -133,16 +204,34 @@ export default function HomePage() {
 
       {/* Footer */}
       <motion.footer
-        className="bg-gradient-to-r from-blue-100 via-white to-blue-100 py-12 text-center px-4"
-        initial="hidden"
-        whileInView="show"
-        variants={itemFade}
-        viewport={{ once: false, amount: 0.2 }}
-      >
-        <h2 className="text-2xl sm:text-3xl font-bold text-blue-900 tracking-wider">BUILDING INDIA’S FUTURE</h2>
-      </motion.footer>
+      className="relative bg-gradient-to-r from-blue-100 via-white to-blue-100 py-12 px-4 text-center overflow-hidden"
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8 }}
+      viewport={{ once: true, amount: 0.2 }}
+    >
+      {/* Background Floating Circles */}
+      <div className="absolute top-0 left-0 w-full h-full overflow-hidden z-0">
+        <div className="absolute top-[-40px] left-[10%] w-24 h-24 bg-blue-200 rounded-full blur-xl animate-pulse" />
+        <div className="absolute bottom-[-30px] right-[15%] w-32 h-32 bg-green-200 rounded-full blur-xl animate-ping" />
+        <div className="absolute top-[30%] right-[5%] w-20 h-20 bg-teal-200 rounded-full blur-xl animate-pulse" />
+      </div>
+
+      {/* Footer Content */}
+      <div className="relative z-10">
+        <div className="flex justify-center mb-6">
+          <img src={companyLogo} alt="Company Logo" className="h-16 object-contain" />
+        </div>
+        <h2 className="text-2xl sm:text-3xl font-bold text-blue-900 tracking-wider mb-4">
+          BUILDING INDIA’S FUTURE
+        </h2>
+        <p className="text-sm text-gray-600">
+          &copy; {new Date().getFullYear()} Modern Construction Co. (India). All rights reserved.
+        </p>
+      </div>
+    </motion.footer>
+
     </div>
-    </>
   );
 }
 
