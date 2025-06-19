@@ -26,14 +26,16 @@ import Equipment from './Components/Equipment';
 import QualityControl from './Components/QualityControl';
 import Clients from './Components/Clients';
 import ContactUs from './Components/ContactUs';
-// import Header from './components/Header';
+import Header from './Components/Header';
+import { AnimatePresence } from 'framer-motion';
 // import Footer from './components/Footer';
 
 export default function App() {
   return (
     
       <div className="font-sans">
-        {/* <Header /> */}
+        <Header />
+        <AnimatePresence mode='wait'>
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutUs />} />
@@ -43,6 +45,7 @@ export default function App() {
           <Route path="/clients" element={<Clients />} />
           <Route path="/contact" element={<ContactUs />} />
         </Routes>
+        </AnimatePresence>
         {/* <Footer /> */}
       </div>    
   );

@@ -25,8 +25,21 @@ const itemFade = {
   show: { opacity: 1, y: 0, transition: { duration: 0.7, ease: 'easeOut' } },
 };
 
+const pageVariants = {
+  initial: { opacity: 0, y: 30, scale: 0.98 },
+  animate: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: 'easeOut' } },
+  exit: { opacity: 0, y: -30, scale: 0.98, transition: { duration: 0.4, ease: 'easeIn' } },
+};
+
 export default function Clients() {
   return (
+    <motion.div
+      className="min-h-screen bg-gradient-to-br from-[#111827] to-[#1f2937] text-white px-8 py-12"
+      variants={pageVariants}
+      initial="initial"
+      animate="animate"
+      exit="exit"
+    >
     <section className="bg-gradient-to-br from-blue-50 via-white to-green-50 py-16 px-4 sm:px-8 min-h-[60vh]">
       <motion.div
         className="max-w-5xl mx-auto text-center"
@@ -64,5 +77,6 @@ export default function Clients() {
         </motion.div>
       </motion.div>
     </section>
+    </motion.div>
   );
 }

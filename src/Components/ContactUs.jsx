@@ -1,4 +1,30 @@
-import { motion } from 'framer-motion';
+import { easeInOut, motion } from 'framer-motion';
+
+const pageVariants3D = {
+  initial: {
+    rotateY: -90,
+    opacity: 0,
+    transformOrigin: 'left center',
+    perspective: 1000,
+  },
+  animate: {
+    rotateY: 0,
+    opacity: 1,
+    transition: {
+      duration: 0.8,
+      ease: 'easeInOut'
+    },
+  },
+  exit: {
+    rotateY: 90,
+    opacity: 0,
+    transition: {
+      duration: 0.6,
+      ease: 'easeInOut',
+    },
+  },
+};
+
 
 const itemFade = {
   hidden: { opacity: 0, y: 30 },
@@ -7,6 +33,13 @@ const itemFade = {
 
 export default function ContactUs() {
   return (
+    <motion.div
+      className="min-h-screen bg-[#0f172a] text-white p-8"
+        variants={pageVariants3D}
+        initial="initial"
+        animate="animate"
+        exit="exit"
+    >
     <motion.section
       initial="hidden"
       whileInView="show"
@@ -53,5 +86,6 @@ export default function ContactUs() {
         </form>
       </motion.div>
     </motion.section>
+    </motion.div>
   );
 }
