@@ -1,28 +1,9 @@
 import { easeInOut, motion } from 'framer-motion';
 
-const pageVariants3D = {
-  initial: {
-    rotateY: -90,
-    opacity: 0,
-    transformOrigin: 'left center',
-    perspective: 1000,
-  },
-  animate: {
-    rotateY: 0,
-    opacity: 1,
-    transition: {
-      duration: 0.8,
-      ease: 'easeInOut'
-    },
-  },
-  exit: {
-    rotateY: 90,
-    opacity: 0,
-    transition: {
-      duration: 0.6,
-      ease: 'easeInOut',
-    },
-  },
+const pageVariants = {
+  initial: { opacity: 0, y: 30, scale: 0.98 },
+  animate: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.6, ease: 'easeOut' } },
+  exit: { opacity: 0, y: -30, scale: 0.98, transition: { duration: 0.4, ease: 'easeIn' } },
 };
 
 
@@ -34,8 +15,8 @@ const itemFade = {
 export default function ContactUs() {
   return (
     <motion.div
-      className="min-h-screen bg-[#0f172a] text-white p-8"
-        variants={pageVariants3D}
+      className="min-h-screen bg-gradient-to-br from-[#111827] to-[#1f2937] text-white px-8 py-12"
+        variants={pageVariants}
         initial="initial"
         animate="animate"
         exit="exit"
